@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+    <!--   <img src="https://hips.hearstapps.com/hmg-prod/images/2017-ford-focus-1557785498.jpg?crop=1.00xw:0.924xh;0,0.0759xh&resize=2048:*" alt="Ford Fiesta">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS40wjil_yp-l7o9mFv5O4vb4mqk7zIT6kuGg&s" alt="Ford Focus">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB2wm09no19pX8Wma8Sp3MJYpxFQhu8KLfvA&s" alt="Ford Escape">
+   -->
+    <div class="container mt-5">
+        <h2 class="text-center">Tienda de Coches - Descuentos</h2>
+        <div class="mb-3">
+            <label for="coche" class="form-label">Selecciona un auto</label>
+            <select id="coche" class="form-select" onchange="actualizarImagen()">
+                <option value="prueba" selected>Despliega</option>
+                <option value="fiesta">Ford Fiesta</option>
+                <option value="focus">Ford Focus</option>
+                <option value="escape">Ford Escape</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="precio" class="form-label">Ingrese el precio ($):</label>
+            <input type="number" id="precio" class="form-control" placeholder="#j: $20000">
+        </div>
+        <button onclick="calularPrecioFinal()" class="btn btn-primary"> Calcular Descuento</button>
+    </div>
+
+    <div id="precioFinal" class="mt-5 fs-5 text-success"></div>
+
+    <div class="text-center">
+        <img id="imagenCoche" src="" alt="Imagen del coche">
+    </div>
+    
+
+
+    <script>
+
+        function calularPrecioFinal() {
+            const coche = document.getElementById("coche").value;
+            const precio = parseFloat(document.getElementById("precio").value);
+
+            let descuento = 0;
+            let nombreCoche = "";
+
+            switch (coche) {
+                case "fiesta":
+                    descuento = 0.05;
+                    nombreCoche = "Ford Fiesta"
+                    break;
+                case "focus":
+                    descuento = 0.10;
+                    nombreCoche = "Ford Focus"
+                    break;
+                case "escape":
+                    descuento = 0.20;
+                    nombreCoche = "Ford Escape"
+                    break;
+                default:
+                    nombreCoche = "Desconocido"
+            }
+            //calcular descuento
+            const montoDescuento = precio * descuento;
+            //calcular monto final
+            const precioFinal = precio - montoDescuento; 
+
+
+            
+
+            document.getElementById("precioFinal").innerHTML = `
+            <strong>Auto:</strong>${nombreCoche}<br>
+            <strong>Descuento aplicado:</strong>${montoDescuento}<br>
+            <strong>Precio final:</strong>${precioFinal.toFixed(2)}
+            `;
+        }
+
+        function actualizarImagen() {
+            const imagen = document.getElementById("imagenCoche");
+            const coche = document.getElementById("coche").value;
+
+            let url = "";
+            switch (coche) {
+                case "fiesta":
+                    url = "https://carzoomers.com/wp-content/uploads/Ford-Fiesta-ST-58324.jpg"
+                    break;
+                case "focus":
+                    url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS40wjil_yp-l7o9mFv5O4vb4mqk7zIT6kuGg&s"
+                    break;
+                case "escape":
+                    url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB2wm09no19pX8Wma8Sp3MJYpxFQhu8KLfvA&s"
+                    break;
+
+                default:
+                    url = "https://storage.googleapis.com/www.savvydealer.com/new/Ford/F-150/Raptor/2020/Features/2020-Ford-F-150-Raptor-Trail-Control.JPG"
+                    break;
+            }
+            imagen.src = url;
+        }
+        actualizarImagen()
+
+
+    </script>
+</body>
+
+</html>

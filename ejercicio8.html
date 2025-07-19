@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5 col col-md-4 text-center">
+        <h2 class="text-center">Tabla de multiplicar</h2>
+        <label for="tabla" class="form-label">Selecciona el numero de tabla que deseas</label>
+        <select id="cat" class="form-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <button onclick="generarTabla()" class="btn btn-primary mt-3">Verificar</button>
+        <button onclick="generarTabla2()" class="btn btn-success mt-3">Verificar</button>
+        <div id="resultado" class="mt-4">
+            
+        </div>
+        <div id="resultado2" class="mt-4">
+            
+        </div>
+        
+    </div>
+
+
+
+
+</body>
+<script>
+    //manera a como yo me imaginaba
+    function generarTabla(){
+        const num = document.getElementById("cat").value;
+        const p = document.createElement(`p`);
+        const resultado1 = document.getElementById("resultado1");
+    
+
+        for (let index = 1; index < 11; index++) {
+            
+            const multi = num*index;
+            const p = document.createElement(`p`);
+            console.log(`${num} * ${index} = ${multi}`) 
+            
+            p.innerHTML = `
+            ${num} x ${index} = ${multi}
+            `;
+            resultado1.appendChild(p);
+        }
+        
+        
+        
+    }
+</script>
+ <script>
+    //buscando ejemplos
+        function generarTabla2() {
+            const numero = parseInt(document.getElementById('cat').value);
+            const resultadoDiv = document.getElementById('resultado2');
+            resultadoDiv.innerHTML = ''; // Limpiar resultados previos
+
+            if (isNaN(numero)) {
+                resultadoDiv.innerHTML = '<p>Por favor, ingresa un número válido.</p>';
+                return;
+            }
+
+            const tabla = document.createElement('table');
+            tabla.border = '1';
+            tabla.style.borderCollapse = 'collapse';
+            tabla.style.marginTop = '10px';
+
+            for (let i = 1; i <= 10; i++) {
+                const fila = document.createElement('tr');
+                const celda = document.createElement('td');
+                celda.textContent = `${numero} x ${i} = ${numero * i}`;
+                celda.style.padding = '5px';
+                fila.appendChild(celda);
+                tabla.appendChild(fila);
+            }
+
+            resultadoDiv.appendChild(tabla);
+        }
+    </script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5 text-center">
+        <h2 class="text-center">Analisis de números</h2>
+        <label class="form-label">Ingresa 10 valores enteros</label>
+        <div class="row justify-content-center align-items-center">
+            <div id="inputs"></div>
+            <button onclick="analizar()" class="btn btn-success m5">Analizar</button>
+            <div id="resultados" class="m5"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    // Generar los 10 campos de entrada
+    const inputsContainer = document.getElementById("inputs");
+    for (let i = 0; i < 10; i++) {
+        const input = document.createElement("input");
+        input.type = "number";
+        input.id = "num" + i;
+        input.className = "form-control m-2"
+        inputsContainer.appendChild(input);
+    }
+
+    function analizar() {
+        let negativos = 0;
+        let positivos = 0;
+        let multiplosDe15 = 0;
+        let sumaPares = 0;
+
+        for (let i = 0; i < 10; i++) {
+            const valor = parseInt(document.getElementById("num" + i).value);
+            if (isNaN(valor)) continue;
+
+            if (valor < 0) negativos++;
+            if (valor > 0) positivos++;
+            if (valor % 15 === 0) multiplosDe15++;
+            if (valor % 2 === 0) sumaPares += valor;
+        }
+
+        document.getElementById("resultados").innerHTML = `
+        <p>❌ Cantidad de números negativos: ${negativos}</p>
+        <p>➕ Cantidad de números positivos: ${positivos}</p>
+        <p>🔢 Números Múltiplos de 15: ${multiplosDe15}</p>
+        <p>✔️ Suma de números pares: ${sumaPares}</p>
+      `;
+    }
+</script>
